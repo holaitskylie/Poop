@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Slime : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject particle;
+    private AudioSource audio;
+    private SpriteRenderer renderer;
+    
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        audio = GetComponent<AudioSource>();
+        renderer = GetComponent<SpriteRenderer>();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (other.gameObject.tag == "Ground")
+        {
+            //파티클 이펙트 재생
+            Instantiate(particle, transform.position, Quaternion.identity);
+
+            //충돌했을 때, 오디오 재생
+            audio.Play();
+
+            //충돌했을 때, 스프라이트 렌더러 컴포넌트를 비활성화 하여 게임 오브젝트가 바로 사라진 듯한 효과를 준다
+            renderer.enabled = false;
+
+            //충돌한 오브젝트가 "Ground" 태그를 가졌다면 슬라임 오브젝트 삭제
+            //오디오 재생을 위하여 1초 뒤에 게임 오브젝트 삭제
+            Destroy(gameObject, 1f);
+        }
+        
+        if(other.gameObject.tag == "Player")
+        {
+            //파티클 이펙트 재생
+            Instantiate(particle, transform.position, Quaternion.identity);
+
+            //충돌했을 때, 오디오 재생
+            audio.Play();
+
+            //충돌했을 때, 스프라이트 렌더러 컴포넌트를 비활성화 하여 게임 오브젝트가 바로 사라진 듯한 효과를 준다
+            renderer.enabled = false;
+
+            //충돌한 오브젝트가 "Player" 태그를 가졌다면 슬라입 오브젝트 삭제
+            //오디오 재생을 위하여 1초 뒤에 게임 오브젝트 삭제
+            Destroy(gameObject, 1f);
+        }
+        
+    }
+}
