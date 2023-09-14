@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,14 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (GameManager.instance.isGameover)
+        {
+            //게임 종료시에 플레이어 캐릭터의 Walk 애니메이션 비활성화
+            animator.SetBool("Walk", false);
+            return;
+        }
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             //왼쪽 이동
@@ -45,5 +54,11 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Walk", false);
         }
         
+    }
+
+    public void GetSlime()
+    {
+        //슬라임과 충돌하면 스프라이트의 컬러값 변경
+        spriteRenderer.color = new Color(0.2f, 0.2f, 0.2f);
     }
 }

@@ -16,12 +16,12 @@ public class SlimeSpawner : MonoBehaviour
 
     void StartSpawning()
     {
-        StartCoroutine(SpawnSlimeRoutine());
+        StartCoroutine("SpawnSlimeRoutine");
     }
 
-    void StopSpawning()
+    public void StopSpawning()
     {
-        StopCoroutine(SpawnSlimeRoutine());
+        StopCoroutine("SpawnSlimeRoutine");
     }
 
     IEnumerator SpawnSlimeRoutine()
@@ -52,5 +52,14 @@ public class SlimeSpawner : MonoBehaviour
         //랜덤으로 스폰할 슬라임 배열의 인덱스값 설정
         int index = Random.Range(0, slimes.Length);
         Instantiate(slimes[index], position, Quaternion.identity);
+    }
+
+    public void DecreaseSlimeInterval()
+    {
+        slimeInterval -= 0.2f;
+        if(slimeInterval <= 0.2f ) {
+            //계속 감소하다가 0 이하로 떨어지지 않도록 0.1f로 고정
+            slimeInterval = 0.1f;
+        }
     }
 }
