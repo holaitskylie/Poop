@@ -54,20 +54,24 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int newScore)
     {
-        score += newScore;
-        scoreText.text = "Score : " + score;
-
-        if (score % 10 == 0)
+        if (!isGameover)
         {
-            SlimeSpawner spawner = FindObjectOfType<SlimeSpawner>();
-            if(spawner != null )
+            score += newScore;
+            scoreText.text = "Score : " + score;
+
+            if (score % 10 == 0)
             {
-                //spawner을 가져오는데 성공했다면
-                spawner.DecreaseSlimeInterval();
-                Debug.Log("Level Upgrade");
-           
+                SlimeSpawner spawner = FindObjectOfType<SlimeSpawner>();
+                if (spawner != null)
+                {
+                    //spawner을 가져오는데 성공했다면
+                    spawner.DecreaseSlimeInterval();
+                    Debug.Log("Level Upgrade");
+
+                }
             }
-        }
+
+        }        
 
     }
 
@@ -98,7 +102,7 @@ public class GameManager : MonoBehaviour
         }
 
         //최고 점수를 recordText 텍스트를 이용해 표시
-        recordText.text = "Best Score : " + (int)bestScore;
+        recordText.text = " " + (int)bestScore;
     }
 
     public void Reload()
@@ -106,5 +110,10 @@ public class GameManager : MonoBehaviour
         //현재 씬 재시작
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }
