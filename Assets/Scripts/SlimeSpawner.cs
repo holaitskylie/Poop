@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,13 +43,13 @@ public class SlimeSpawner : MonoBehaviour
 
     void SpawnSlime()
     {
-        //½½¶óÀÓÀÌ ¶³¾îÁú À§Ä¡ ÁöÁ¤
-        //xÃàÀÇ °ªÀ» ·£´ıÀ¸·Î ÁöÁ¤ÇÑ´Ù
+        //ìŠ¬ë¼ì„ì´ ë–¨ì–´ì§ˆ ìœ„ì¹˜ ì§€ì •
+        //xì¶•ì˜ ê°’ì„ ëœë¤ìœ¼ë¡œ ì§€ì •í•œë‹¤
         float posX = Random.Range(-3f, 3f);       
         Vector3 position = new Vector3(posX, 6, 0);
 
-        //½ºÆùÇÒ ½½¶óÀÓ ÇÁ¸®ÆÕ »ı¼º
-        //·£´ıÀ¸·Î ½ºÆùÇÒ ½½¶óÀÓ ¹è¿­ÀÇ ÀÎµ¦½º°ª ¼³Á¤
+        //ìŠ¤í°í•  ìŠ¬ë¼ì„ í”„ë¦¬íŒ¹ ìƒì„±
+        //ëœë¤ìœ¼ë¡œ ìŠ¤í°í•  ìŠ¬ë¼ì„ ë°°ì—´ì˜ ì¸ë±ìŠ¤ê°’ ì„¤ì •
         int index = Random.Range(0, slimes.Length);
         Instantiate(slimes[index], position, Quaternion.identity);
     }
@@ -58,7 +58,7 @@ public class SlimeSpawner : MonoBehaviour
     {
         slimeInterval -= 0.2f;
         if(slimeInterval <= 0.2f ) {
-            //°è¼Ó °¨¼ÒÇÏ´Ù°¡ 0 ÀÌÇÏ·Î ¶³¾îÁöÁö ¾Êµµ·Ï 0.1f·Î °íÁ¤
+            //ê³„ì† ê°ì†Œí•˜ë‹¤ê°€ 0 ì´í•˜ë¡œ ë–¨ì–´ì§€ì§€ ì•Šë„ë¡ 0.1fë¡œ ê³ ì •
             slimeInterval = 0.1f;
         }
     }

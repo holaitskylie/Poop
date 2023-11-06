@@ -1,19 +1,19 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed; //¹è°æÈ­¸éÀÇ ÀÌµ¿ ¼Óµµ
+    private float moveSpeed; //ë°°ê²½í™”ë©´ì˜ ì´ë™ ì†ë„
 
-    private float posX; //¹è°æÀÇ °¡·Î ±æÀÌ
+    private float posX; //ë°°ê²½ì˜ ê°€ë¡œ ê¸¸ì´
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //posXÀÇ °ªÀ» BoxCollider2D ÄÄÆ÷³ÍÆ®ÀÇ Size x°ªÀ¸·Î ±¸ÇÑ´Ù
+        //posXì˜ ê°’ì„ BoxCollider2D ì»´í¬ë„ŒíŠ¸ì˜ Size xê°’ìœ¼ë¡œ êµ¬í•œë‹¤
         BoxCollider2D backgroundCollider = GetComponent<BoxCollider2D>();
         posX = backgroundCollider.size.x;
 
@@ -22,10 +22,10 @@ public class BackgroundScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //¿ŞÂÊ ¹æÇâÀ¸·Î moveSpeed¸¸Å­ ÀÌµ¿ÇÑ´Ù
+        //ì™¼ìª½ ë°©í–¥ìœ¼ë¡œ moveSpeedë§Œí¼ ì´ë™í•œë‹¤
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
-        //ÇöÀç À§Ä¡°¡ ¿øÁ¡¿¡¼­ ¿ŞÂÊÀ¸·Î posX ÀÌ»ó ÀÌµ¿ ÇßÀ» ¶§ Àç¹èÄ¡
+        //í˜„ì¬ ìœ„ì¹˜ê°€ ì›ì ì—ì„œ ì™¼ìª½ìœ¼ë¡œ posX ì´ìƒ ì´ë™ í–ˆì„ ë•Œ ì¬ë°°ì¹˜
         if (transform.position.x <= -posX)
         {
             Reposition();
@@ -34,7 +34,7 @@ public class BackgroundScroll : MonoBehaviour
 
     void Reposition()
     {
-        //offset ÇöÀç À§Ä¡¿¡¼­ ¾ó¸¶¸¸Å­ ¿À¸¥ÂÊÀ¸·Î ¹Ğ¾î³¾Áö ÀúÀåÇÒ º¯¼ö
+        //offset í˜„ì¬ ìœ„ì¹˜ì—ì„œ ì–¼ë§ˆë§Œí¼ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë°€ì–´ë‚¼ì§€ ì €ì¥í•  ë³€ìˆ˜
         Vector2 offset = new Vector2(posX * 2f, 0);
         transform.position = (Vector2)transform.position + offset;
 

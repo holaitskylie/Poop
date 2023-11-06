@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,56 +9,47 @@ public class Slime : MonoBehaviour
     private AudioSource audio;
     private SpriteRenderer renderer;
     
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         audio = GetComponent<AudioSource>();
         renderer = GetComponent<SpriteRenderer>();
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     void OnTriggerEnter2D(Collider2D other)
     {       
         if (other.gameObject.tag == "Slime" || other.gameObject.tag == "Background")
         {
-            //slime, Background ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¿ÍÀÇ Ãæµ¹ Ã³¸® ¹«½Ã
+            //slime, Background íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ì™€ì˜ ì¶©ëŒ ì²˜ë¦¬ ë¬´ì‹œ
             return;
         }
         else if (other.gameObject.tag == "Ground")
         {
-            //Áö¸é°ú Ãæµ¹ÇÏ¸é GamaManagerÀÇ ÀÎ½ºÅÏ½º¸¦ ÅëÇØ AddScoreÀÇ newScore ÀÎÀÚ°ªÀ¸·Î 1 Àü´Ş
+            //ì§€ë©´ê³¼ ì¶©ëŒí•˜ë©´ GamaManagerì˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ í†µí•´ AddScoreì˜ newScore ì¸ìê°’ìœ¼ë¡œ 1 ì „ë‹¬
             GameManager.instance.AddScore(1);        
             
         }
         else if(other.gameObject.tag == "Player")
         {
-            //ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍ¿Í Ãæµ¹ÇÏ¸é °ÔÀÓ ¿À¹ö Ã³¸®
+            //í”Œë ˆì´ì–´ ìºë¦­í„°ì™€ ì¶©ëŒí•˜ë©´ ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬
             GameManager.instance.OnPlayerDead();
 
-            //ÇÃ·¹ÀÌ¾îÀÇ ÄÃ·¯°ªÀ» ¹Ù²Ù´Â ¸Ş¼­µå ½ÇÇà
+            //í”Œë ˆì´ì–´ì˜ ì»¬ëŸ¬ê°’ì„ ë°”ê¾¸ëŠ” ë©”ì„œë“œ ì‹¤í–‰
             other.gameObject.GetComponent<PlayerMove>().GetSlime();
         }
 
-        //ÆÄÆ¼Å¬ ÀÌÆåÆ® Àç»ı
+        //íŒŒí‹°í´ ì´í™íŠ¸ ì¬ìƒ
         Instantiate(particle, transform.position, Quaternion.identity);
 
-        //Ãæµ¹ÇßÀ» ¶§, ¿Àµğ¿À Àç»ı
+        //ì¶©ëŒí–ˆì„ ë•Œ, ì˜¤ë””ì˜¤ ì¬ìƒ
         audio.Play();
 
-        //Ãæµ¹ÇßÀ» ¶§, ½ºÇÁ¶óÀÌÆ® ·»´õ·¯ ÄÄÆ÷³ÍÆ®¸¦ ºñÈ°¼ºÈ­ ÇÏ¿© °ÔÀÓ ¿ÀºêÁ§Æ®°¡ ¹Ù·Î »ç¶óÁø µíÇÑ È¿°ú¸¦ ÁØ´Ù
+        //ì¶©ëŒí–ˆì„ ë•Œ, ìŠ¤í”„ë¼ì´íŠ¸ ë Œë”ëŸ¬ ì»´í¬ë„ŒíŠ¸ë¥¼ ë¹„í™œì„±í™” í•˜ì—¬ ê²Œì„ ì˜¤ë¸Œì íŠ¸ê°€ ë°”ë¡œ ì‚¬ë¼ì§„ ë“¯í•œ íš¨ê³¼ë¥¼ ì¤€ë‹¤
         renderer.enabled = false;
-
-        //Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®°¡ "Ground" ÅÂ±×¸¦ °¡Á³´Ù¸é ½½¶óÀÓ ¿ÀºêÁ§Æ® »èÁ¦
-        //¿Àµğ¿À Àç»ıÀ» À§ÇÏ¿© 1ÃÊ µÚ¿¡ °ÔÀÓ ¿ÀºêÁ§Æ® »èÁ¦
+                
+        //ì˜¤ë””ì˜¤ ì¬ìƒì„ ìœ„í•˜ì—¬ 1ì´ˆ ë’¤ì— ê²Œì„ ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
         Destroy(gameObject, 1f);
-
 
     }
 }

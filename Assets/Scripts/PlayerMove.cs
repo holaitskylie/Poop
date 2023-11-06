@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,40 +17,39 @@ public class PlayerMove : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //ê²Œì„ì´ ì¢…ë£Œëœ ìƒíƒœë¼ë©´
         if (GameManager.instance.isGameover)
         {
-            //°ÔÀÓ Á¾·á½Ã¿¡ ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍÀÇ Walk ¾Ö´Ï¸ŞÀÌ¼Ç ºñÈ°¼ºÈ­
+            //ê²Œì„ ì¢…ë£Œì‹œì— í”Œë ˆì´ì–´ ìºë¦­í„°ì˜ Walk ì• ë‹ˆë©”ì´ì…˜ ë¹„í™œì„±í™”
             animator.SetBool("Walk", false);
             return;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            //¿ŞÂÊ ÀÌµ¿
+            //ì™¼ìª½ ì´ë™
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
 
-            //¾Ö´Ï¸ŞÀÌ¼Ç ÀüÈ¯ Á¶°Ç ½ÇÇà
+            //ì• ë‹ˆë©”ì´ì…˜ ì „í™˜ ì¡°ê±´ ì‹¤í–‰
             animator.SetBool("Walk", true);
 
-            //ÀÌ¹ÌÁöÀÇ ÁÂ¿ì¹İÀü
+            //ì´ë¯¸ì§€ì˜ ì¢Œìš°ë°˜ì „
             spriteRenderer.flipX = false;
         }
         else if(Input.GetKey(KeyCode.RightArrow)) {
-            //¿À¸¥ÂÊ ÀÌµ¿
+            //ì˜¤ë¥¸ìª½ ì´ë™
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
 
-            //¾Ö´Ï¸ŞÀÌ¼Ç ÀüÈ¯ Á¶°Ç ½ÇÇà
+            //ì• ë‹ˆë©”ì´ì…˜ ì „í™˜ ì¡°ê±´ ì‹¤í–‰
             animator.SetBool("Walk", true);
 
-            //ÀÌ¹ÌÁöÀÇ ÁÂ¿ì¹İÀü
+            //ì´ë¯¸ì§€ì˜ ì¢Œìš°ë°˜ì „
             spriteRenderer.flipX = true; 
         }
         else
-        {   //¾Æ¹«·± Å° ÀÔ·ÂÀÌ ¾ø´Â °æ¿ì, Idle ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+        {   //ì•„ë¬´ëŸ° í‚¤ ì…ë ¥ì´ ì—†ëŠ” ê²½ìš°, Idle ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
             animator.SetBool("Walk", false);
         }
         
@@ -58,7 +57,7 @@ public class PlayerMove : MonoBehaviour
 
     public void GetSlime()
     {
-        //½½¶óÀÓ°ú Ãæµ¹ÇÏ¸é ½ºÇÁ¶óÀÌÆ®ÀÇ ÄÃ·¯°ª º¯°æ
+        //ìŠ¬ë¼ì„ê³¼ ì¶©ëŒí•˜ë©´ ìŠ¤í”„ë¼ì´íŠ¸ì˜ ì»¬ëŸ¬ê°’ ë³€ê²½
         spriteRenderer.color = new Color(0.2f, 0.2f, 0.2f);
     }
 }

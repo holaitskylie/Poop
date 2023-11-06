@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,18 +9,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public bool isGameover = false; //°ÔÀÓ ¿À¹ö »óÅÂ
+    public bool isGameover = false; //ê²Œì„ ì˜¤ë²„ ìƒíƒœ
     [SerializeField]
-    private Text scoreText; //Á¡¼ö¸¦ Ãâ·ÂÇÒ UI ÅØ½ºÆ®
+    private Text scoreText; //ì ìˆ˜ë¥¼ ì¶œë ¥í•  UI í…ìŠ¤íŠ¸
     [SerializeField]
-    private GameObject gameoverUI; //°ÔÀÓ¿À¹ö ½Ã È°¼ºÈ­ÇÒ UI °ÔÀÓ ¿ÀºêÁ§Æ®
+    private GameObject gameoverUI; //ê²Œì„ì˜¤ë²„ ì‹œ í™œì„±í™”í•  UI ê²Œì„ ì˜¤ë¸Œì íŠ¸
     [SerializeField]
-    private Text recordText; //ÃÖ°í ±â·ÏÀ» Ç¥½ÃÇÒ ÅØ½ºÆ®
+    private Text recordText; //ìµœê³  ê¸°ë¡ì„ í‘œì‹œí•  í…ìŠ¤íŠ¸
 
     private int score = 0;
 
-
-    //°ÔÀÓ ½ÃÀÛ°ú µ¿½Ã¿¡ ½Ì±ÛÅÏ ±¸¼º
+    #region Singleton : GameManager
+    //ê²Œì„ ì‹œì‘ê³¼ ë™ì‹œì— ì‹±ê¸€í„´ êµ¬ì„±
     void Awake()
     {
         if(instance == null)
@@ -33,38 +33,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    #endregion
         
-    }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        //°ÔÀÓ ¿À¹ö »óÅÂ¿¡¼­ °ÔÀÓÀ» Àç½ÃÀÛ ÇÒ ¼ö ÀÖ°Ô ÇÏ´Â Ã³¸®
+        //ê²Œì„ ì˜¤ë²„ ìƒíƒœì—ì„œ ê²Œì„ì„ ì¬ì‹œì‘ í•  ìˆ˜ ìˆê²Œ í•˜ëŠ” ì²˜ë¦¬
         if(isGameover)
         {
-            //°ÔÀÓ ¿À¹ö UI È°¼ºÈ­
+            //ê²Œì„ ì˜¤ë²„ UI í™œì„±í™”
             gameoverUI.SetActive(true);
             
         }
         
     }
 
+    //ì ìˆ˜ ì¶”ê°€
     public void AddScore(int newScore)
     {
+        //ê²Œì„ ì˜¤ë²„ê°€ ì•„ë‹Œ ìƒíƒœì—ì„œë§Œ ì§„í–‰
         if (!isGameover)
         {
             score += newScore;
             scoreText.text = "Score : " + score;
 
+            //ê²Œì„ ì ìˆ˜ 10ì  ë‹¨ìœ„ë¡œ ìŠ¬ë¼ì„ ìŠ¤í° ì‹œê°„ì„ ë‹¨ì¶•
             if (score % 10 == 0)
             {
                 SlimeSpawner spawner = FindObjectOfType<SlimeSpawner>();
                 if (spawner != null)
                 {
-                    //spawnerÀ» °¡Á®¿À´Âµ¥ ¼º°øÇß´Ù¸é
+                    //spawnerì„ ê°€ì ¸ì˜¤ëŠ”ë° ì„±ê³µí–ˆë‹¤ë©´
+                    //spawnerì˜ DecreaseSlimeInterval() ì‹¤í–‰
                     spawner.DecreaseSlimeInterval();
                     Debug.Log("Level Upgrade");
 
@@ -75,39 +76,39 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍ »ç¸Á ½Ã °ÔÀÓ ¿À¹ö¸¦ ½ÇÇàÇÏ´Â ¸Ş¼­µå
+    //í”Œë ˆì´ì–´ ìºë¦­í„° ì‚¬ë§ ì‹œ ê²Œì„ ì˜¤ë²„ë¥¼ ì‹¤í–‰í•˜ëŠ” ë©”ì„œë“œ
     public void OnPlayerDead()
     {
-        //ÇöÀç »óÅÂ¸¦ °ÔÀÓ ¿À¹ö »óÅÂ·Î º¯°æ
+        //í˜„ì¬ ìƒíƒœë¥¼ ê²Œì„ ì˜¤ë²„ ìƒíƒœë¡œ ë³€ê²½
         isGameover = true;
 
         SlimeSpawner spawner = FindObjectOfType<SlimeSpawner>();
         if(spawner != null ) 
         {
-            //½½¶óÀÓ »ı¼º ÁßÁö
+            //ìŠ¬ë¼ì„ ìƒì„± ì¤‘ì§€
             spawner.StopSpawning();
         }
 
-        //BestScore Å°·Î ÀúÀåµÈ ÀÌÀü±îÁöÀÇ ÃÖ°í ±â·Ï °¡Á®¿À±â
+        //"BestScore" keyë¡œ ì €ì¥ëœ ì´ì „ê¹Œì§€ì˜ ìµœê³  ê¸°ë¡ ê°€ì ¸ì˜¤ê¸°
         float bestScore = PlayerPrefs.GetFloat("BestScore");
 
-        if(score> bestScore)
+        if(score > bestScore)
         {
-            //ÀÌÀü±îÁöÀÇ ÃÖ°í Á¡¼öº¸´Ù ÇöÀç Á¡¼ö°¡ ´õ ³ô´Ù¸é
-            //ÃÖ°í Á¡¼ö ±â·Ï °ªÀ» ÇöÀç Á¡¼ö °ªÀ¸·Î º¯°æ
+            //ì´ì „ê¹Œì§€ì˜ ìµœê³  ì ìˆ˜ë³´ë‹¤ í˜„ì¬ ì ìˆ˜ê°€ ë” ë†’ë‹¤ë©´
+            //ìµœê³  ì ìˆ˜ ê¸°ë¡ ê°’ì„ í˜„ì¬ ì ìˆ˜ ê°’ìœ¼ë¡œ ë³€ê²½
             bestScore = score;
 
-            //º¯°æµÈ ÃÖ°í ±â·ÏÀ» BestScore Å°·Î ÀúÀå
+            //ë³€ê²½ëœ ìµœê³  ê¸°ë¡ì„ BestScore í‚¤ë¡œ ì €ì¥
             PlayerPrefs.SetFloat("BestScore", bestScore);
         }
 
-        //ÃÖ°í Á¡¼ö¸¦ recordText ÅØ½ºÆ®¸¦ ÀÌ¿ëÇØ Ç¥½Ã
+        //ìµœê³  ì ìˆ˜ë¥¼ recordText í…ìŠ¤íŠ¸ë¥¼ ì´ìš©í•´ í‘œì‹œ
         recordText.text = " " + (int)bestScore;
     }
 
     public void Reload()
     {
-        //ÇöÀç ¾À Àç½ÃÀÛ
+        //í˜„ì¬ ì”¬ ì¬ì‹œì‘
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
